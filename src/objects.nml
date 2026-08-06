@@ -28,7 +28,7 @@ if (param_OGFX_objects_grid == 1) {
             remove_cost_multiplier: 0;
             introduction_date:      0x00000000;
             end_of_life_date:       0xFFFFFFFF;
-            object_flags:           bitmask(OBJ_FLAG_ANYTHING_REMOVE, OBJ_FLAG_NO_FOUNDATIONS, OBJ_FLAG_ALLOW_BRIDGE);
+            object_flags:           param_remove == 1 ? 2080 : 2084;
             height:                 0;
             num_views:              1;
         }
@@ -68,7 +68,7 @@ if (param_OGFX_objects_grid == 1) {
             remove_cost_multiplier: 0;
             introduction_date:      0x00000000;
             end_of_life_date:       0xFFFFFFFF;
-            object_flags:           bitmask(OBJ_FLAG_ANYTHING_REMOVE, OBJ_FLAG_NO_FOUNDATIONS, OBJ_FLAG_ALLOW_BRIDGE);
+            object_flags:           param_remove == 1 ? 2080 : 2084;
             height:                 0;
             num_views:              1;
         }
@@ -118,7 +118,7 @@ if (param_OGFX_objects_grid == 1 && climate == CLIMATE_ARCTIC) {
             remove_cost_multiplier: 0;
             introduction_date:      0x00000000;
             end_of_life_date:       0xFFFFFFFF;
-            object_flags:           bitmask(OBJ_FLAG_ANYTHING_REMOVE, OBJ_FLAG_NO_FOUNDATIONS, OBJ_FLAG_ALLOW_BRIDGE);
+            object_flags:           param_remove == 1 ? 2080 : 2084;
             height:                 0;
             num_views:              1;
         }
@@ -199,7 +199,7 @@ if (param_OGFX_objects_grid == 1) {
             remove_cost_multiplier: 0;
             introduction_date:      0x00000000;
             end_of_life_date:       0xFFFFFFFF;
-            object_flags:           bitmask(OBJ_FLAG_ANYTHING_REMOVE, OBJ_FLAG_NO_FOUNDATIONS, OBJ_FLAG_ALLOW_BRIDGE);
+            object_flags:           param_remove == 1 ? 2080 : 2084;
             height:                 0;
             num_views:              4;
         }
@@ -316,7 +316,7 @@ if (param_OGFX_objects_grid == 1) {
             remove_cost_multiplier: 0;
             introduction_date:      0x00000000;
             end_of_life_date:       0xFFFFFFFF;
-            object_flags:           bitmask(OBJ_FLAG_ANYTHING_REMOVE, OBJ_FLAG_NO_FOUNDATIONS, OBJ_FLAG_ALLOW_BRIDGE);
+            object_flags:           param_remove == 1 ? 2080 : 2084;
             height:                 0;
             num_views:              4;
         }
@@ -432,7 +432,7 @@ if (param_OGFX_objects_grid == 1) {
             remove_cost_multiplier: 0;
             introduction_date:      0x00000000;
             end_of_life_date:       0xFFFFFFFF;
-            object_flags:           bitmask(OBJ_FLAG_ANYTHING_REMOVE, OBJ_FLAG_NO_FOUNDATIONS, OBJ_FLAG_ALLOW_BRIDGE);
+            object_flags:           param_remove == 1 ? 2080 : 2084;
             height:                 0;
             num_views:              4;
         }
@@ -548,7 +548,7 @@ if (param_OGFX_objects_grid == 1) {
             remove_cost_multiplier: 0;
             introduction_date:      0x00000000;
             end_of_life_date:       0xFFFFFFFF;
-            object_flags:           bitmask(OBJ_FLAG_ANYTHING_REMOVE, OBJ_FLAG_NO_FOUNDATIONS, OBJ_FLAG_ALLOW_BRIDGE);
+            object_flags:           param_remove == 1 ? 2080 : 2084;
             height:                 0;
             num_views:              4;
         }
@@ -664,7 +664,7 @@ if (param_OGFX_objects_grid == 1) {
             remove_cost_multiplier: 0;
             introduction_date:      0x00000000;
             end_of_life_date:       0xFFFFFFFF;
-            object_flags:           bitmask(OBJ_FLAG_ANYTHING_REMOVE, OBJ_FLAG_NO_FOUNDATIONS, OBJ_FLAG_ALLOW_BRIDGE);
+            object_flags:           param_remove == 1 ? 2080 : 2084;
             height:                 0;
             num_views:              4;
         }
@@ -780,7 +780,7 @@ if (param_OGFX_objects_grid == 1) {
             remove_cost_multiplier: 0;
             introduction_date:      0x00000000;
             end_of_life_date:       0xFFFFFFFF;
-            object_flags:           bitmask(OBJ_FLAG_ANYTHING_REMOVE, OBJ_FLAG_NO_FOUNDATIONS, OBJ_FLAG_ALLOW_BRIDGE);
+            object_flags:           param_remove == 1 ? 2080 : 2084;
             height:                 0;
             num_views:              4;
         }
@@ -896,7 +896,7 @@ if (param_OGFX_objects_grid == 1) {
             remove_cost_multiplier: 0;
             introduction_date:      0x00000000;
             end_of_life_date:       0xFFFFFFFF;
-            object_flags:           bitmask(OBJ_FLAG_ANYTHING_REMOVE, OBJ_FLAG_NO_FOUNDATIONS, OBJ_FLAG_ALLOW_BRIDGE);
+            object_flags:           param_remove == 1 ? 2080 : 2084;
             height:                 0;
             num_views:              4;
         }
@@ -954,7 +954,7 @@ if (param_OGFX_objects_grid == 1) {
             remove_cost_multiplier: 0;
             introduction_date:      0x00000000;
             end_of_life_date:       0xFFFFFFFF;
-            object_flags:           bitmask(OBJ_FLAG_ANYTHING_REMOVE, OBJ_FLAG_NO_FOUNDATIONS, OBJ_FLAG_ALLOW_BRIDGE);
+            object_flags:           param_remove == 1 ? 2080 : 2084;
             height:                 0;
             num_views:              4;
         }
@@ -995,7 +995,7 @@ switch (FEAT_OBJECTS, SELF, switch_ogfx_grid_palms_view, [
     5: layout_ogfx_grid_grass_coast;
     6: layout_ground_coast;
     7: layout_ground_coast;  }
-switch (FEAT_OBJECTS, SELF, switch_ogfx_grid_palms_menu, [STORE_TEMP(0, 0), STORE_TEMP(0, 19), view]) {
+switch (FEAT_OBJECTS, SELF, switch_ogfx_grid_palms_menu, [STORE_TEMP(0, 0), view]) {
     0: layout_ogfx_grid_palms_sand;
     1: layout_ogfx_grid_palms_grass;
     2: layout_ogfx_grid_palms_ground;
@@ -1013,7 +1013,7 @@ if (param_OGFX_objects_grid == 1) {
             remove_cost_multiplier: 0;
             introduction_date:      0x00000000;
             end_of_life_date:       0xFFFFFFFF;
-            object_flags:           bitmask(OBJ_FLAG_ANYTHING_REMOVE, OBJ_FLAG_NO_FOUNDATIONS, OBJ_FLAG_ALLOW_BRIDGE);
+            object_flags:           param_remove == 1 ? 2080 : 2084;
             height:                 0;
             num_views:              4;
         }
@@ -1093,7 +1093,7 @@ if (param_OGFX_objects_grid == 1) {
             remove_cost_multiplier: 0;
             introduction_date:      0x00000000;
             end_of_life_date:       0xFFFFFFFF;
-            object_flags:           bitmask(OBJ_FLAG_ANYTHING_REMOVE, OBJ_FLAG_NO_FOUNDATIONS, OBJ_FLAG_ALLOW_BRIDGE, OBJ_FLAG_ON_WATER);
+            object_flags:           param_remove == 1 ? 2088 : 2092;
             height:                 0;
             num_views:              4;
         }
@@ -1173,7 +1173,7 @@ if (param_OGFX_objects_grid == 1) {
             remove_cost_multiplier: 0;
             introduction_date:      0x00000000;
             end_of_life_date:       0xFFFFFFFF;
-            object_flags:           bitmask(OBJ_FLAG_ANYTHING_REMOVE, OBJ_FLAG_NO_FOUNDATIONS, OBJ_FLAG_ALLOW_BRIDGE);
+            object_flags:           param_remove == 1 ? 2080 : 2084;
             height:                 0;
             num_views:              4;
         }
@@ -1247,7 +1247,7 @@ if (param_OGFX_objects_grid == 1) {
             remove_cost_multiplier: 0;
             introduction_date:      0x00000000;
             end_of_life_date:       0xFFFFFFFF;
-            object_flags:           bitmask(OBJ_FLAG_ANYTHING_REMOVE, OBJ_FLAG_ALLOW_BRIDGE);
+            object_flags:           param_remove == 1 ? 2048 : 2052;
             height:                 0;
             num_views:              1;
         }

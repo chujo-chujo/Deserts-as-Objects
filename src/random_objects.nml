@@ -1,4 +1,7 @@
 
+// bitmask(OBJ_FLAG_ANYTHING_REMOVE, OBJ_FLAG_NO_FOUNDATIONS, OBJ_FLAG_ALLOW_BRIDGE, OBJ_FLAG_ONLY_SE) == 4 + 32 + 2048 + 1 → 2085
+// bitmask(OBJ_FLAG_NO_FOUNDATIONS, OBJ_FLAG_ALLOW_BRIDGE, OBJ_FLAG_ONLY_SE) == 32 + 2048 + 1 → 2085 → 2081
+
 // // Random oases at mapgen
 spritelayout layout_oasis_menu {
     ground   { sprite: spriteset_text(6); } }
@@ -25,14 +28,14 @@ spritelayout layout_oasis_T4 {
     ground   { sprite: GROUNDSPRITE_DESERT_1_2; } }
 
 spritelayout layout_oasis_empty {
-    ground   { sprite: GROUNDSPRITE_DESERT; } }
+    ground   { sprite: GROUNDSPRITE_DESERT + LOAD_TEMP(0); } }
 spritelayout layout_oasis_grass {
-    ground   { sprite: GROUNDSPRITE_DESERT_1_2; } }
+    ground   { sprite: GROUNDSPRITE_DESERT_1_2 + LOAD_TEMP(0); } }
 spritelayout layout_oasis_plant {
-    ground   { sprite: GROUNDSPRITE_DESERT_1_2; }
+    ground   { sprite: GROUNDSPRITE_DESERT_1_2 + LOAD_TEMP(0); }
     building { sprite: spriteset_plants3(LOAD_TEMP(0) + LOAD_TEMP(1)); } }
 spritelayout layout_oasis_palms {
-    ground   { sprite: GROUNDSPRITE_DESERT_1_2; }
+    ground   { sprite: GROUNDSPRITE_DESERT_1_2 + LOAD_TEMP(0); }
     building { sprite: spriteset_palms3(LOAD_TEMP(0) + LOAD_TEMP(1)); zextent: 80; } }
 
 switch (FEAT_OBJECTS, SELF, switch_oasis_T1, [
@@ -70,6 +73,13 @@ switch (FEAT_OBJECTS, SELF, switch_oasis_layout_grass, [
     return layout_oasis_plant; }
 
 switch (FEAT_OBJECTS, SELF, switch_oasis, relative_pos) {
+    //                (0,0)
+    //           (1,0)     (0,1)
+    //      (2,0)     (1,1)     (0,2)
+    // (3,0)     (2,1)     (1,2)     (0,3)
+    //      (3,1)     (2,2)     (1,3)
+    //           (3,2)     (2,3)
+    //                (3,3)
     relative_coord(2, 1): switch_oasis_T1;
     relative_coord(2, 2): switch_oasis_T2;
     relative_coord(1, 2): switch_oasis_T3;
@@ -88,7 +98,40 @@ switch (FEAT_OBJECTS, SELF, switch_oasis, relative_pos) {
     relative_coord(1, 3): switch_oasis_layout_grass;
     relative_coord(2, 3): switch_oasis_layout_grass;
     relative_coord(3, 3): switch_oasis_layout_grass;
- }
+}
+
+switch (FEAT_OBJECTS, SELF, switch_check_flat, getbits(extra_callback_info1, 0, 5)) {
+    0: return CB_RESULT_LOCATION_ALLOW;
+    return CB_RESULT_LOCATION_DISALLOW;
+}
+
+switch (FEAT_OBJECTS, SELF, switch_check_landscape, [getbits(extra_callback_info2, 0, 8) + 100 * (terrain_type == TILETYPE_DESERT)]) {
+    // 16*Y + X
+    //                (0,0)
+    //           (1,0)     (0,1)
+    //      (2,0)     (1,1)     (0,2)
+    // (3,0)     (2,1)     (1,2)     (0,3)
+    //      (3,1)     (2,2)     (1,3)
+    //           (3,2)     (2,3)
+    //                (3,3)
+    100: return CB_RESULT_LOCATION_ALLOW;
+    101: return CB_RESULT_LOCATION_ALLOW;
+    102: return CB_RESULT_LOCATION_ALLOW;
+    103: return CB_RESULT_LOCATION_ALLOW;
+    116: return CB_RESULT_LOCATION_ALLOW;
+    117: switch_check_flat;
+    118: switch_check_flat;
+    119: return CB_RESULT_LOCATION_ALLOW;
+    132: return CB_RESULT_LOCATION_ALLOW;
+    133: switch_check_flat;
+    134: switch_check_flat;
+    135: return CB_RESULT_LOCATION_ALLOW;
+    148: return CB_RESULT_LOCATION_ALLOW;
+    149: return CB_RESULT_LOCATION_ALLOW;
+    150: return CB_RESULT_LOCATION_ALLOW;
+    151: return CB_RESULT_LOCATION_ALLOW;
+    return CB_RESULT_LOCATION_DISALLOW;
+}
 
 if (game_mode != GAMEMODE_EDITOR) {
     item (FEAT_OBJECTS, oasis, 251){
@@ -102,7 +145,7 @@ if (game_mode != GAMEMODE_EDITOR) {
             remove_cost_multiplier: 0;
             introduction_date:      0x00000000;
             end_of_life_date:       0xFFFFFFFF;
-            object_flags:           bitmask(OBJ_FLAG_ANYTHING_REMOVE, OBJ_FLAG_ALLOW_BRIDGE, OBJ_FLAG_ONLY_SE);
+            object_flags:           param_remove_random == 1 ? 2081 : 2085;
             height:                 0;
             num_views:              1;
             count_per_map256:       param_random_oases_count;
@@ -111,7 +154,8 @@ if (game_mode != GAMEMODE_EDITOR) {
             default:         switch_oasis;
             purchase:        layout_oasis_menu;
             additional_text: string(STR_autoslope);
-            tile_check:      function_check_desert();
+            tile_check:      switch_check_landscape();
+            autoslope:       return CB_RESULT_AUTOSLOPE;
         }
     }
 }
@@ -167,7 +211,7 @@ if (game_mode != GAMEMODE_EDITOR) {
             remove_cost_multiplier: 0;
             introduction_date:      0x00000000;
             end_of_life_date:       0xFFFFFFFF;
-            object_flags:           bitmask(OBJ_FLAG_ANYTHING_REMOVE, OBJ_FLAG_NO_FOUNDATIONS, OBJ_FLAG_ALLOW_BRIDGE, OBJ_FLAG_ONLY_SE);
+            object_flags:           param_remove_random == 1 ? 2081 : 2085;
             height:                 0;
             num_views:              1;
             count_per_map256:       param_random_yellow_rocks_count;
@@ -230,7 +274,7 @@ if (game_mode != GAMEMODE_EDITOR) {
             remove_cost_multiplier: 0;
             introduction_date:      0x00000000;
             end_of_life_date:       0xFFFFFFFF;
-            object_flags:           bitmask(OBJ_FLAG_ANYTHING_REMOVE, OBJ_FLAG_NO_FOUNDATIONS, OBJ_FLAG_ALLOW_BRIDGE, OBJ_FLAG_ONLY_SE);
+            object_flags:           param_remove_random == 1 ? 2081 : 2085;
             height:                 0;
             num_views:              1;
             count_per_map256:       param_random_gray_rocks_count;
@@ -295,7 +339,7 @@ if (game_mode != GAMEMODE_EDITOR) {
             remove_cost_multiplier: 0;
             introduction_date:      0x00000000;
             end_of_life_date:       0xFFFFFFFF;
-            object_flags:           bitmask(OBJ_FLAG_ANYTHING_REMOVE, OBJ_FLAG_NO_FOUNDATIONS, OBJ_FLAG_ALLOW_BRIDGE, OBJ_FLAG_ONLY_SE);
+            object_flags:           param_remove_random == 1 ? 2081 : 2085;
             height:                 0;
             num_views:              1;
             count_per_map256:       param_random_brown_rocks_count;

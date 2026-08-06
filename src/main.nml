@@ -3,7 +3,7 @@ grf {
     name:  string(STR_GRF_NAME);
     desc:  string(STR_GRF_DESCRIPTION);
     url:   string(STR_GRF_URL);
-    version: 1;
+    version: 2;
     min_compatible_version: 1;
 
     param 0 {
@@ -12,7 +12,7 @@ grf {
             desc:      string(STR_PAR_replace_DESC);
             type:      int;
             min_value: 0;
-            max_value: 4;
+            max_value: 7;
             def_value: 1;
             names: {
                 0: string(STR_PAR_replace_NONE);
@@ -20,6 +20,9 @@ grf {
                 2: string(STR_PAR_replace_OGFX2_nogrid);
                 3: string(STR_PAR_replace_OGFX_grid);
                 4: string(STR_PAR_replace_OGFX_nogrid);
+                5: string(STR_PAR_replace_Mars);
+                6: string(STR_PAR_replace_OGFX2ARCTIC_grid);
+                7: string(STR_PAR_replace_OGFX2ARCTIC_nogrid);
             };
         }
     }
@@ -92,6 +95,38 @@ grf {
             type:      int;
             min_value: 0;
             max_value: 255;
+            def_value: 0;
+        }
+    }
+    param 9 {
+        param_replace_cacti {
+            name:      string(STR_replace_cacti_NAME);
+            desc:      string(STR_replace_cacti_DESC);
+            type:      int;
+            min_value: 0;
+            max_value: 3;
+            def_value: 0;
+            names: {
+                0: string(STR_PAR_replace_NONE);
+                1: string(STR_PAR_plants);
+                2: string(STR_PAR_palms);
+                3: string(STR_PAR_mix);
+            };
+        }
+    }
+    param 10 {
+        param_remove {
+            name:      string(STR_remove_NAME);
+            desc:      string(STR_remove_DESC);
+            type:      bool;
+            def_value: 0;
+        }
+    }
+    param 11 {
+        param_remove_random {
+            name:      string(STR_remove_random_NAME);
+            desc:      string(STR_remove_random_DESC);
+            type:      bool;
             def_value: 0;
         }
     }
@@ -415,25 +450,25 @@ template template_oasis_T3_32() {
     template_oasis_T3(31)
 }
 template template_road() {
-    [   0, 0, 64, 31, -31,  0]
-    [  80, 0, 64, 31, -31,  0]
-    [ 160, 0, 64, 31, -31,  0]
-    [ 240, 0, 64, 31, -31,  0]
-    [ 320, 0, 64, 31, -31,  0]
-    [ 400, 0, 64, 31, -31,  0]
-    [ 480, 0, 64, 31, -31,  0]
-    [ 560, 0, 64, 31, -31,  0]
-    [ 640, 0, 64, 31, -31,  0]
-    [ 720, 0, 64, 31, -31,  0]
-    [ 800, 0, 64, 31, -31,  0]
-    [ 880, 0, 64, 39, -31, -8]
-    [ 960, 0, 64, 23, -31,  0]
-    [1040, 0, 64, 23, -31,  0]
-    [1120, 0, 64, 39, -31, -8]
-    [1200, 0, 64, 31, -31,  0]
-    [1280, 0, 64, 31, -31,  0]
-    [1360, 0, 64, 31, -31,  0]
-    [1440, 0, 64, 31, -31,  0]
+    [   0, 0, 64, 31, -31,  0, WHITE]
+    [  80, 0, 64, 31, -31,  0, WHITE]
+    [ 160, 0, 64, 31, -31,  0, WHITE]
+    [ 240, 0, 64, 31, -31,  0, WHITE]
+    [ 320, 0, 64, 31, -31,  0, WHITE]
+    [ 400, 0, 64, 31, -31,  0, WHITE]
+    [ 480, 0, 64, 31, -31,  0, WHITE]
+    [ 560, 0, 64, 31, -31,  0, WHITE]
+    [ 640, 0, 64, 31, -31,  0, WHITE]
+    [ 720, 0, 64, 31, -31,  0, WHITE]
+    [ 800, 0, 64, 31, -31,  0, WHITE]
+    [ 880, 0, 64, 39, -31, -8, WHITE]
+    [ 960, 0, 64, 23, -31,  0, WHITE]
+    [1040, 0, 64, 23, -31,  0, WHITE]
+    [1120, 0, 64, 39, -31, -8, WHITE]
+    [1200, 0, 64, 31, -31,  0, WHITE]
+    [1280, 0, 64, 31, -31,  0, WHITE]
+    [1360, 0, 64, 31, -31,  0, WHITE]
+    [1440, 0, 64, 31, -31,  0, WHITE]
 }
 template template_rail(y) {
     [   0, y*64, 64, 31, -31,  0]
@@ -540,14 +575,14 @@ template template_ogfx2_tunnels() {
     [480, 100, 64, 39, -31,  -8]
     [560, 100, 45, 39, -31, -38]
     // road
-    [  0, 150, 64, 39, -31,  -8]
-    [ 80, 150, 64, 39, -31, -38]
-    [160, 150, 64, 39, -31,   0]
-    [240, 150, 64, 39, -31, -30]
-    [320, 150, 64, 39, -31,   0]
-    [400, 150, 64, 39, -31, -30]
-    [480, 150, 64, 39, -31,  -8]
-    [560, 150, 64, 39, -31, -38]
+    [  0, 150, 64, 39, -31,  -8, WHITE]
+    [ 80, 150, 64, 39, -31, -38, WHITE]
+    [160, 150, 64, 39, -31,   0, WHITE]
+    [240, 150, 64, 39, -31, -30, WHITE]
+    [320, 150, 64, 39, -31,   0, WHITE]
+    [400, 150, 64, 39, -31, -30, WHITE]
+    [480, 150, 64, 39, -31,  -8, WHITE]
+    [560, 150, 64, 39, -31, -38, WHITE]
 }
 template template_ogfx2_railtype_tunnels() {
     [0,   200, 32, 29, -31,   2]
@@ -592,6 +627,56 @@ template template_text() {
     [1280, 0, 64, 41, -31, -18]
     [1360, 0, 64, 41, -31, -18]
     [1440, 0, 64, 41, -31, -18]
+}
+
+template template_groundtiles_empty() {
+    [0, 0, 1, 1, 0, 0]
+    [0, 0, 1, 1, 0, 0]
+    [0, 0, 1, 1, 0, 0]
+    [0, 0, 1, 1, 0, 0]
+    [0, 0, 1, 1, 0, 0]
+    [0, 0, 1, 1, 0, 0]
+    [0, 0, 1, 1, 0, 0]
+    [0, 0, 1, 1, 0, 0]
+    [0, 0, 1, 1, 0, 0]
+    [0, 0, 1, 1, 0, 0]
+    [0, 0, 1, 1, 0, 0]
+    [0, 0, 1, 1, 0, 0]
+    [0, 0, 1, 1, 0, 0]
+    [0, 0, 1, 1, 0, 0]
+    [0, 0, 1, 1, 0, 0]
+    [0, 0, 1, 1, 0, 0]
+    [0, 0, 1, 1, 0, 0]
+    [0, 0, 1, 1, 0, 0]
+    [0, 0, 1, 1, 0, 0]
+}
+template template_rail_empty() {
+    [0, 0, 1, 1, 0, 0]
+    [0, 0, 1, 1, 0, 0]
+    [0, 0, 1, 1, 0, 0]
+    [0, 0, 1, 1, 0, 0]
+    [0, 0, 1, 1, 0, 0]
+    [0, 0, 1, 1, 0, 0]
+    [0, 0, 1, 1, 0, 0]
+    [0, 0, 1, 1, 0, 0]
+    [0, 0, 1, 1, 0, 0]
+    [0, 0, 1, 1, 0, 0]
+    [0, 0, 1, 1, 0, 0]
+    [0, 0, 1, 1, 0, 0]
+    [0, 0, 1, 1, 0, 0]
+    [0, 0, 1, 1, 0, 0]
+    [0, 0, 1, 1, 0, 0]
+    [0, 0, 1, 1, 0, 0]
+    [0, 0, 1, 1, 0, 0]
+    [0, 0, 1, 1, 0, 0]
+    [0, 0, 1, 1, 0, 0]
+    [0, 0, 1, 1, 0, 0]
+    [0, 0, 1, 1, 0, 0]
+    [0, 0, 1, 1, 0, 0]
+    [0, 0, 1, 1, 0, 0]
+    [0, 0, 1, 1, 0, 0]
+    [0, 0, 1, 1, 0, 0]
+    [0, 0, 1, 1, 0, 0]
 }
 
 
@@ -802,7 +887,7 @@ switch (FEAT_OBJECTS, SELF, function_random_bits_from_tile_2_ranges, x_offset, y
     128..255: 1;
 }
 
-// disallow oases outside deserts, if placed autmatically
+// disallow objects outside deserts, if placed autmatically
 switch (FEAT_OBJECTS, SELF, function_check_desert, terrain_type) {
     TILETYPE_DESERT: return CB_FAILED;
     return CB_RESULT_LOCATION_DISALLOW;
@@ -822,6 +907,59 @@ switch (FEAT_OBJECTS, SELF, function_oasis_check_editor, game_mode) {
 //  SAND REPLACEMENT
 /////////////////////////////////////////////////////////////////////
 
+// Cacti → plants, palms
+if (climate == CLIMATE_TROPICAL && param_replace_cacti == 1) {
+    replace plants1912(1912, "gfx/plants0.png") { [  240,  130, 64, 101, -31, -72 ] }
+    replace plants1913(1913, "gfx/plants0.png") { [  400,    0, 64, 101, -31, -70 ] }
+    replace plants1914(1914, "gfx/plants0.png") { [  972, 3900, 52, 110, -25, -80 ] }
+    replace plants1915(1915, "gfx/plants1.png") { [ 1200, 3640, 44, 117, -21, -94 ] }
+    replace plants1916(1916, "gfx/plants0.png") { [   80, 3770, 64, 101, -31, -70 ] }
+    replace plants1917(1917, "gfx/plants1.png") { [    0, 1170, 64, 101, -35, -72 ] }
+    replace plants1918(1918, "gfx/plants0.png") { [ 1040, 3120, 64, 101, -31, -70 ] }
+
+    replace plants1919(1919, "gfx/plants0.png") { [  819, 4030, 34, 101, -20, -74 ] }
+    replace plants1920(1920, "gfx/plants0.png") { [ 1200, 3770, 46, 101, -22, -78 ] }
+    replace plants1921(1921, "gfx/plants0.png") { [  160, 3770, 52, 101, -25, -70 ] }
+    replace plants1922(1922, "gfx/plants1.png") { [  800, 3510, 64, 101, -27, -82 ] }
+    replace plants1923(1923, "gfx/plants1.png") { [    0, 4030, 64, 101, -31, -70 ] }
+    replace plants1924(1924, "gfx/plants1.png") { [  400, 1170, 64, 101, -31, -70 ] }
+    replace plants1925(1925, "gfx/plants1.png") { [  320, 3900, 64, 101, -31, -70 ] }
+}
+if (climate == CLIMATE_TROPICAL && param_replace_cacti == 2) {
+    replace palms1912(1912, "gfx/palms0.png") { [ 1306, 2860, 14,  93,  -6, -62-8 ] }
+    replace palms1913(1913, "gfx/palms0.png") { [   18, 1690, 20, 104,  -9, -73-8 ] }
+    replace palms1914(1914, "gfx/palms0.png") { [   21, 3510, 20,  90,  -9, -59-8 ] }
+    replace palms1915(1915, "gfx/palms0.png") { [ 1148,  390, 28, 105, -13, -74-8 ] }
+    replace palms1916(1916, "gfx/palms0.png") { [ 1398, 3120, 20, 105,  -9, -74-8 ] }
+    replace palms1917(1917, "gfx/palms0.png") { [  333, 3120, 24, 100, -11, -69-8 ] }
+    replace palms1918(1918, "gfx/palms0.png") { [ 1394, 1560, 20, 102,  -9, -71-8 ] }
+
+    replace palms1919(1919, "gfx/palms2.png") { [  499, 3640, 32, 100, -15, -69-8 ] }
+    replace palms1920(1920, "gfx/palms2.png") { [  264, 3770, 34,  97, -16, -66-8 ] }
+    replace palms1921(1921, "gfx/palms2.png") { [   13, 3380, 30,  95, -14, -64-8 ] }
+    replace palms1922(1922, "gfx/palms2.png") { [  347, 2990, 30,  94, -14, -63-8 ] }
+    replace palms1923(1923, "gfx/palms2.png") { [ 1384, 3120, 26, 111, -12, -80-8 ] }
+    replace palms1924(1924, "gfx/palms2.png") { [ 1454, 3640, 26, 109, -12, -78-8 ] }
+    replace palms1925(1925, "gfx/palms2.png") { [ 1393, 3250, 20, 103,  -9, -72-8 ] }
+}
+if (climate == CLIMATE_TROPICAL && param_replace_cacti == 3) {
+    replace mix1912(1912, "gfx/plants0.png") { [  240,  130, 64, 101, -31, -72 ] }
+    replace mix1913(1913, "gfx/plants0.png") { [  400,    0, 64, 101, -31, -70 ] }
+    replace mix1914(1914, "gfx/plants0.png") { [  972, 3900, 52, 110, -25, -80 ] }
+    replace mix1915(1915, "gfx/plants1.png") { [ 1200, 3640, 44, 117, -21, -94 ] }
+    replace mix1916(1916, "gfx/plants0.png") { [   80, 3770, 64, 101, -31, -70 ] }
+    replace mix1917(1917, "gfx/plants1.png") { [    0, 1170, 64, 101, -35, -72 ] }
+    replace mix1918(1918, "gfx/plants0.png") { [ 1040, 3120, 64, 101, -31, -70 ] }
+
+    replace mix1919(1919, "gfx/palms2.png") { [  499, 3640, 32, 100, -15, -69-8 ] }
+    replace mix1920(1920, "gfx/palms2.png") { [  264, 3770, 34,  97, -16, -66-8 ] }
+    replace mix1921(1921, "gfx/palms2.png") { [   13, 3380, 30,  95, -14, -64-8 ] }
+    replace mix1922(1922, "gfx/palms2.png") { [  347, 2990, 30,  94, -14, -63-8 ] }
+    replace mix1923(1923, "gfx/palms2.png") { [ 1384, 3120, 26, 111, -12, -80-8 ] }
+    replace mix1924(1924, "gfx/palms2.png") { [ 1454, 3640, 26, 109, -12, -78-8 ] }
+    replace mix1925(1925, "gfx/palms2.png") { [ 1393, 3250, 20, 103,  -9, -72-8 ] }
+}
+
 // OGFX 2
 if (climate == CLIMATE_TROPICAL && param_replace == 1) {
     replace ogfx2_grid_sand       (4550, "gfx/ogfx2_grid_ground.png")    { template_groundtiles(0) }
@@ -836,7 +974,6 @@ if (climate == CLIMATE_TROPICAL && param_replace == 1) {
     replace ogfx2_grid_cross_magl (1402, "gfx/ogfx2_grid_cross.png")     { template_cross_rail(2) }
     replacenew(RAILTYPE_TUNNELS, "gfx/ogfx2_nogrid_tunnels.png", 8) { template_ogfx2_railtype_tunnels() }
 }
-
 if (climate == CLIMATE_TROPICAL && param_replace == 2) {
     replace ogfx2_nogrid_sand       (4550, "gfx/ogfx2_nogrid_ground.png")   { template_groundtiles(0) }
     replace ogfx2_nogrid_grass_sand (4512, "gfx/ogfx2_nogrid_ground.png")   { template_groundtiles(2) }
@@ -877,6 +1014,51 @@ if (climate == CLIMATE_TROPICAL && param_replace == 4) {
     replace ogfx_nogrid_cross_mono (1390, "gfx/ogfx_nogrid_cross.png")    { template_cross_rail(1) }
     replace ogfx_nogrid_cross_magl (1402, "gfx/ogfx_nogrid_cross.png")    { template_cross_rail(2) }
     replacenew(RAILTYPE_TUNNELS, "gfx/ogfx_nogrid_tunnels.png", 8) { template_ogfx_railtype_tunnels() }
+}
+
+// Mars
+if (climate == CLIMATE_TROPICAL && param_replace == 5) {
+    replace mars_grid_sand       (4550, "gfx/ogfx_grid_ground.png")   { template_groundtiles_empty() }
+    alternative_sprites(mars_grid_sand, ZOOM_LEVEL_NORMAL, BIT_DEPTH_32BPP, "gfx/mars_grid_ground.png") { template_groundtiles(0) }
+    replace mars_grid_grass_sand (4512, "gfx/ogfx_grid_ground.png")   { template_groundtiles_empty() }
+    alternative_sprites(mars_grid_grass_sand, ZOOM_LEVEL_NORMAL, BIT_DEPTH_32BPP, "gfx/mars_grid_ground.png") { template_groundtiles(2) }
+    replace mars_grid_rail       (1037, "gfx/mars_grid_railroad.png") { template_rail(0) }
+    replace mars_grid_monorail   (1119, "gfx/mars_grid_railroad.png") { template_rail(1) }
+    replace mars_grid_maglev     (1201, "gfx/mars_grid_railroad.png") { template_rail(2) }
+    replace mars_grid_road       (1351, "gfx/mars_grid_road.png")     { template_road() }
+    replace mars_grid_tunnels_0  (2397, "gfx/mars_grid_tunnels.png")  { template_ogfx_tunnels() }
+    replace mars_grid_cross_rail (1378, "gfx/mars_grid_cross.png")    { template_cross_rail(0) }
+    replace mars_grid_cross_mono (1390, "gfx/mars_grid_cross.png")    { template_cross_rail(1) }
+    replace mars_grid_cross_magl (1402, "gfx/mars_grid_cross.png")    { template_cross_rail(2) }
+    replacenew(RAILTYPE_TUNNELS, "gfx/mars_grid_tunnels.png", 8) { template_ogfx2_railtype_tunnels() }
+}
+
+// OGFX 2 Arctic
+if (climate == CLIMATE_TROPICAL && param_replace == 6) {
+    replace ogfx2arctic_grid_sand       (4550, "gfx/ogfx2arctic_grid_ground.png")    { template_groundtiles(0) }
+    replace ogfx2arctic_grid_grass_sand (4512, "gfx/ogfx2arctic_grid_ground.png")    { template_groundtiles(2) }
+    replace ogfx2arctic_grid_rail       (1037, "gfx/ogfx2arctic_grid_railroad.png")  { template_rail(0) }
+    replace ogfx2arctic_grid_monorail   (1119, "gfx/ogfx2arctic_grid_railroad.png")  { template_rail(1) }
+    replace ogfx2arctic_grid_maglev     (1201, "gfx/ogfx2arctic_grid_railroad.png")  { template_rail(2) }
+    replace ogfx2arctic_grid_road       (1351, "gfx/ogfx2arctic_grid_road.png")      { template_road() }
+    replace ogfx2arctic_grid_tunnels_0  (2397, "gfx/ogfx2arctic_nogrid_tunnels.png") { template_ogfx2_tunnels() }
+    replace ogfx2arctic_grid_cross_rail (1378, "gfx/ogfx2arctic_grid_cross.png")     { template_cross_rail(0) }
+    replace ogfx2arctic_grid_cross_mono (1390, "gfx/ogfx2arctic_grid_cross.png")     { template_cross_rail(1) }
+    replace ogfx2arctic_grid_cross_magl (1402, "gfx/ogfx2arctic_grid_cross.png")     { template_cross_rail(2) }
+    replacenew(RAILTYPE_TUNNELS, "gfx/ogfx2arctic_nogrid_tunnels.png", 8) { template_ogfx2_railtype_tunnels() }
+} 
+if (climate == CLIMATE_TROPICAL && param_replace == 7) {
+    replace ogfx2arctic_nogrid_sand       (4550, "gfx/ogfx2arctic_nogrid_ground.png")   { template_groundtiles(0) }
+    replace ogfx2arctic_nogrid_grass_sand (4512, "gfx/ogfx2arctic_nogrid_ground.png")   { template_groundtiles(2) }
+    replace ogfx2arctic_nogrid_rail       (1037, "gfx/ogfx2arctic_nogrid_railroad.png") { template_rail(0) }
+    replace ogfx2arctic_nogrid_monorail   (1119, "gfx/ogfx2arctic_nogrid_railroad.png") { template_rail(1) }
+    replace ogfx2arctic_nogrid_maglev     (1201, "gfx/ogfx2arctic_nogrid_railroad.png") { template_rail(2) }
+    replace ogfx2arctic_nogrid_road       (1351, "gfx/ogfx2arctic_nogrid_road.png")     { template_road() }
+    replace ogfx2arctic_nogrid_tunnels_0  (2397, "gfx/ogfx2arctic_nogrid_tunnels.png")  { template_ogfx2_tunnels() }
+    replace ogfx2arctic_nogrid_cross_rail (1378, "gfx/ogfx2arctic_nogrid_cross.png")    { template_cross_rail(0) }
+    replace ogfx2arctic_nogrid_cross_mono (1390, "gfx/ogfx2arctic_nogrid_cross.png")    { template_cross_rail(1) }
+    replace ogfx2arctic_nogrid_cross_magl (1402, "gfx/ogfx2arctic_nogrid_cross.png")    { template_cross_rail(2) }
+    replacenew(RAILTYPE_TUNNELS, "gfx/ogfx2arctic_nogrid_tunnels.png", 8) { template_ogfx2_railtype_tunnels() }
 }
 
 
@@ -963,3 +1145,8 @@ spriteset (spriteset_ogfx_oasis_ground_menu,  "gfx/oasis_ground_menu.png") { [ 1
 spriteset (spriteset_oasis_menu,              "gfx/oasis.png")             { [ 0, 0, 128, 150, -63, -103, ANIM ] }
 
 spritelayout layout_ground_coast { ground { sprite: LOAD_TEMP(2); } }
+
+
+// bitmask(OBJ_FLAG_ANYTHING_REMOVE, OBJ_FLAG_NO_FOUNDATIONS, OBJ_FLAG_ALLOW_BRIDGE) == 4 + 32 + 2048 → 2084
+// bitmask(OBJ_FLAG_ANYTHING_REMOVE, OBJ_FLAG_NO_FOUNDATIONS, OBJ_FLAG_ALLOW_BRIDGE, OBJ_FLAG_ON_WATER) == 4 + 32 + 2048 + 8 → 2092
+// bitmask(OBJ_FLAG_ANYTHING_REMOVE, OBJ_FLAG_ALLOW_BRIDGE) == 4 + 2048 → 2052
