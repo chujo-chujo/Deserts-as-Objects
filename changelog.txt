@@ -1,0 +1,17 @@
++--------------------+
+| DESERTS AS OBJECTS |
++--------------------+
+
+
+ === Changelog ===
+
+
+v1.1 (2026-08-07)
+-> Added more variants in "Desert graphics replacement"
+-> Added an option to replace the default cacti with alternative vegetation
+-> Added parameters to restrict object removal (prevents accidental overbuilding)
+-> Fixed foundations of spawned oases
+
+
+v1.0 (2025-04-08)
+->  Initial release
