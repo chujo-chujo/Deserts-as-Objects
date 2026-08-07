@@ -58,6 +58,14 @@ grf {
             def_value: 0;
         }
     }
+    param 9 {
+        param_MARS_objects_grid {
+            name:      string(STR_MARS_objects_grid_NAME);
+            desc:      string(STR_MARS_objects_grid_DESC);
+            type:      bool;
+            def_value: 0;
+        }
+    }
     param 5 {
         param_random_oases_count {
             name:      string(STR_random_oases_NAME);
@@ -98,7 +106,7 @@ grf {
             def_value: 0;
         }
     }
-    param 9 {
+    param 10 {
         param_replace_cacti {
             name:      string(STR_replace_cacti_NAME);
             desc:      string(STR_replace_cacti_DESC);
@@ -114,7 +122,7 @@ grf {
             };
         }
     }
-    param 10 {
+    param 11 {
         param_remove {
             name:      string(STR_remove_NAME);
             desc:      string(STR_remove_DESC);
@@ -122,7 +130,7 @@ grf {
             def_value: 0;
         }
     }
-    param 11 {
+    param 12 {
         param_remove_random {
             name:      string(STR_remove_random_NAME);
             desc:      string(STR_remove_random_DESC);
@@ -615,6 +623,7 @@ template template_text() {
     [ 400, 0, 64, 64, -30, -19]
     // DO NOT USE
     [ 480, 0, 64, 64, -30, -19]
+    // MARS
     [ 560, 0, 64, 41, -31, -18]
     [ 640, 0, 64, 41, -31, -18]
     [ 720, 0, 64, 41, -31, -18]
@@ -1140,9 +1149,10 @@ spriteset (spriteset_oasis_T1,"gfx/oasis.png")   { template_oasis_T1_32() }
 spriteset (spriteset_oasis_T2,"gfx/oasis.png")   { template_oasis_T2_32() }
 spriteset (spriteset_oasis_T3,"gfx/oasis.png")   { template_oasis_T3_32() }
 
-spriteset (spriteset_ogfx2_oasis_ground_menu, "gfx/oasis_ground_menu.png") { [ 0,   0, 128, 150, -63, -103 ] }
+spriteset (spriteset_ogfx2_oasis_ground_menu, "gfx/oasis_ground_menu.png") { [   0, 0, 128, 150, -63, -103 ] }
 spriteset (spriteset_ogfx_oasis_ground_menu,  "gfx/oasis_ground_menu.png") { [ 150, 0, 128, 150, -63, -103 ] }
-spriteset (spriteset_oasis_menu,              "gfx/oasis.png")             { [ 0, 0, 128, 150, -63, -103, ANIM ] }
+spriteset (spriteset_oasis_menu,              "gfx/oasis.png")             { [   0, 0, 128, 150, -63, -103, ANIM ] }
+spriteset (spriteset_mars_oasis_ground_menu, ZOOM_LEVEL_NORMAL, BIT_DEPTH_32BPP, "gfx/oasis_mars_ground_menu.png") { [ 0, 0, 128, 150, -63, -103 ] }
 
 spritelayout layout_ground_coast { ground { sprite: LOAD_TEMP(2); } }
 

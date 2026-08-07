@@ -2,14 +2,14 @@ import re
 from datetime import datetime
 
 DICT_EDIT = {
-		"EDIT_TEXT_A": [0, 0, 1, 1],
-		"EDIT_TEXT_B": [2, 3, 2, 3],
-		"EDIT_CLASS": ["SNDY", "SNDY", "SNDY", "SNDY"],
-		"EDIT_STR_CLASSNAME": ["STR_CLASSNAME", "STR_CLASSNAME", "STR_CLASSNAME", "STR_CLASSNAME"]
+		"EDIT_TEXT_A": [0, 0, 1, 1, 7],
+		"EDIT_TEXT_B": [2, 3, 2, 3, 2],
+		"EDIT_CLASS": ["SNDY", "SNDY", "SNDY", "SNDY", "SNDY"],
+		"EDIT_STR_CLASSNAME": ["STR_CLASSNAME", "STR_CLASSNAME", "STR_CLASSNAME", "STR_CLASSNAME", "STR_CLASSNAME"]
 	}
 
 def create_variants(file_path):
-	""" Creates a list of four variants OGFX/OGFX2, GRID/NOGRID. """
+	""" Creates a list of four variants OGFX/OGFX2 x GRID/NOGRID + Mars. """
 	def replace_with_case_sensitive(original, old, new):
 		return re.sub(
 			old, 
@@ -47,8 +47,13 @@ def create_variants(file_path):
 	for line in input_string:
 		edited_line = additional_editing(line, 0)
 		variant_1.append(edited_line)
-	
-	return [variant_1, variant_2, variant_3, variant_4]
+	variant_Mars = []
+	for line in input_string:
+		edited_line = replace_with_case_sensitive(line, "ogfx", "Mars")
+		edited_line = additional_editing(edited_line, 4)
+		variant_Mars.append(edited_line)
+
+	return [variant_1, variant_2, variant_3, variant_4, variant_Mars]
 
 def insert_data(main_file, data, rand_file, output_file):
 	with open(main_file, 'r', encoding="utf-8-sig") as mainfile, \
@@ -67,20 +72,25 @@ def number_objects(list_of_variants):
 	result  = []
 	counter = 3
 	for variant in list_of_variants:
+		if "MARS" in variant[1]:
+			counter = 1000
 		for line in variant:
 			if "EDIT_ID" in line:
 				line = line.replace("EDIT_ID", f"{counter:03d}")
 				counter += 4
+
+			if '"gfx/mars_grid_ground.png"' in line:
+				line = line.replace('"gfx/mars_grid_ground.png"', 'ZOOM_LEVEL_NORMAL, BIT_DEPTH_32BPP, "gfx/mars_grid_ground.png"')
 			result.append(line)
 		counter += 2
 
 	return result
-
+	
 def update_lang_file():
 	""" Add the current date to the lang file """
 	# Get current date, format the date as "Month day, year"
 	current_datetime = datetime.now()
-	formatted_date = "{LTBLUE}" + current_datetime.strftime("%B %d, %Y")
+	formatted_date = "{LTBLUE}" + current_datetime.strftime("%B %#d, %Y")
 	
 	# Open lang file, replace old date with new one
 	with open("lang/english.lng", 'r') as file:
@@ -96,9 +106,12 @@ def update_lang_file():
 	with open("lang/english.lng", 'w') as file:
 		file.write("".join(english_lng_with_date))
 
+def main():
+	output_file = "desert_objects_v1.1.nml"
 
-output_file = "desert_objects.nml"
+	list_of_variants = create_variants("objects.nml")
+	insert_data(main_file="main.nml", data=list_of_variants, rand_file="random_objects.nml", output_file=output_file)
+	update_lang_file()
 
-list_of_variants = create_variants("objects.nml")
-insert_data(main_file="main.nml", data=list_of_variants, rand_file="random_objects.nml", output_file=output_file)
-update_lang_file()
+if __name__ == '__main__':
+	main()
