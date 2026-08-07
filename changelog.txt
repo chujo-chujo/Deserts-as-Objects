@@ -7,7 +7,7 @@
 
 
 v1.1 (2026-08-07)
--> Added more variants in "Desert graphics replacement"
+-> Added more variants in "Desert graphics replacement" (and related desert objects)
 -> Added an option to replace the default cacti with alternative vegetation
 -> Added parameters to restrict object removal (prevents accidental overbuilding)
 -> Fixed foundations of spawned oases
